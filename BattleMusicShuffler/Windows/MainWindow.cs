@@ -4,7 +4,7 @@ using Dalamud.Interface.Windowing;
 using ImGuiNET;
 using ImGuiScene;
 
-namespace SamplePlugin.Windows;
+namespace BattleMusicShuffler.Windows;
 
 public class MainWindow : Window, IDisposable
 {
@@ -14,35 +14,35 @@ public class MainWindow : Window, IDisposable
     public MainWindow(Plugin plugin, TextureWrap goatImage) : base(
         "My Amazing Window", ImGuiWindowFlags.NoScrollbar | ImGuiWindowFlags.NoScrollWithMouse)
     {
-        this.SizeConstraints = new WindowSizeConstraints
+        SizeConstraints = new WindowSizeConstraints
         {
             MinimumSize = new Vector2(375, 330),
             MaximumSize = new Vector2(float.MaxValue, float.MaxValue)
         };
 
-        this.GoatImage = goatImage;
-        this.Plugin = plugin;
+        GoatImage = goatImage;
+        Plugin = plugin;
     }
 
     public void Dispose()
     {
-        this.GoatImage.Dispose();
+        GoatImage.Dispose();
     }
 
     public override void Draw()
     {
-        ImGui.Text($"The random config bool is {this.Plugin.Configuration.SomePropertyToBeSavedAndWithADefault}");
+        ImGui.Text($"The random config bool is {Plugin.Configuration.SomePropertyToBeSavedAndWithADefault}");
 
         if (ImGui.Button("Show Settings"))
         {
-            this.Plugin.DrawConfigUI();
+            Plugin.DrawConfigUI();
         }
 
         ImGui.Spacing();
 
         ImGui.Text("Have a goat:");
         ImGui.Indent(55);
-        ImGui.Image(this.GoatImage.ImGuiHandle, new Vector2(this.GoatImage.Width, this.GoatImage.Height));
+        ImGui.Image(GoatImage.ImGuiHandle, new Vector2(GoatImage.Width, GoatImage.Height));
         ImGui.Unindent(55);
     }
 }
